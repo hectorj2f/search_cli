@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+USER_PATH="github.com/hectorj2f"
+REPO_PATH="${USER_PATH}/search_cli"
+
+if [ ! -h gopath/src/${REPO_PATH} ]; then
+	mkdir -p gopath/src/${USER_PATH}
+	ln -s ../../../.. gopath/src/${REPO_PATH} || exit 255
+fi
+
+export GOBIN=${PWD}/bin
+export GOPATH=${GOPATH}:${PWD}/gopath
+
+eval $(go env)
+
+echo "Building swarm cli ..."
+go build -o $GOBIN/search_cli ${REPO_PATH}/cli
