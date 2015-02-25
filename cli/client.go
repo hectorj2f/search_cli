@@ -4,6 +4,7 @@ import (
   "fmt"
   "flag"
   "os"
+  "strconv"
   "text/tabwriter"
 
   "github.com/hectorj2f/search_cli/cli/ascii_art"
@@ -43,7 +44,13 @@ func init() {
   globalFlagset.BoolVar(&globalFlags.Debug, "debug", false, "Print out more debug information to stderr")
   globalFlagset.BoolVar(&globalFlags.UseTls, "use-tls", false, "Use TLS in the communication layer")
   globalFlagset.StringVar(&globalFlags.ServerAddr, "server-addr", "", "Set the swarm server to be connected")
-  globalFlagset.IntVar(&globalFlags.ServerPort, "server-port", resources.SERVER_PORT, "Set the port server to be connected")
+
+  if os.Getenv(resources.PORT_FLAG) != "" {
+    port, _ := strconv.Atoi(os.Getenv(resources.PORT_FLAG))
+    globalFlagset.IntVar(&globalFlags.ServerPort, "server-port", port, "Set the port server to be connected")
+  } else {
+    globalFlagset.IntVar(&globalFlags.ServerPort, "server-port", resources.SERVER_PORT, "Set the port server to be connected")
+  }
 }
 
 func init() {
