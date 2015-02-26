@@ -8,4 +8,5 @@ const (
   TLS_KEY_FLAG = "TLS_KEY"
   TLS_CERT_FLAG = "TLS_CERT"
   PORT_FLAG = "PORT"
+  SERVER_FLAG = "SERVER"
 )

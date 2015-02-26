@@ -7,7 +7,7 @@ import (
   )
 
 func GiantSwarmfy() {
-  fmt.Printf("Giant swarm user search engine version: %s\n", version.Version)
+  fmt.Printf("\x1b[31;1mGiant swarm user search-engine, version: %s\x1b[0m \n", version.Version)
   fmt.Println("   ////*       *\\\\\\\\ ")
   fmt.Println(" ,//  ///////////  \\\\, ")
   fmt.Println("./   /////////////    \\.")

@@ -18,6 +18,6 @@ func init() {
 }
 
 func runVersion(args []string) (exit int) {
-	fmt.Printf("swarmsearch version %s\n", version.Version)
+	fmt.Printf("\x1b[31;1mSwarmsearch version %s\x1b[0m \n", version.Version)
 	return
 }

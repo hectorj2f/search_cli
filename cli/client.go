@@ -40,14 +40,21 @@ type Command struct {
 }
 
 func init() {
+  server := os.Getenv(resources.SERVER_FLAG)
+  port := os.Getenv(resources.PORT_FLAG)
+
   globalFlagset.BoolVar(&globalFlags.Help, "help", false, "Print usage information and exit")
   globalFlagset.BoolVar(&globalFlags.Debug, "debug", false, "Print out more debug information to stderr")
   globalFlagset.BoolVar(&globalFlags.UseTls, "use-tls", false, "Use TLS in the communication layer")
-  globalFlagset.StringVar(&globalFlags.ServerAddr, "server-addr", "", "Set the swarm server to be connected")
 
-  if os.Getenv(resources.PORT_FLAG) != "" {
-    port, _ := strconv.Atoi(os.Getenv(resources.PORT_FLAG))
-    globalFlagset.IntVar(&globalFlags.ServerPort, "server-port", port, "Set the port server to be connected")
+  if server != "" {
+    globalFlagset.StringVar(&globalFlags.ServerAddr, "server-addr", server, "Set the swarm server to be connected")
+  } else {
+    globalFlagset.StringVar(&globalFlags.ServerAddr, "server-addr", "", "Set the swarm server to be connected")
+  }
+  if port != "" {
+    port_value, _ := strconv.Atoi(port)
+    globalFlagset.IntVar(&globalFlags.ServerPort, "server-port", port_value, "Set the port server to be connected")
   } else {
     globalFlagset.IntVar(&globalFlags.ServerPort, "server-port", resources.SERVER_PORT, "Set the port server to be connected")
   }
